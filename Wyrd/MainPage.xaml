@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wyrd.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Image
+                Source="wyrd_default.png"
+                HeightRequest="185"
+                Aspect="AspectFit" />
+
+            <Label
+                Text="Wyrd Search"
+                Style="{StaticResource Headline}" />
+
+            <Label
+                Text="Click Below to Begin"
+                Style="{StaticResource SubHeadline}" />
+
+            <!-- A button that navigates to the GamePage when clicked -->
+            <Button
+                x:Name="StartBtn"
+                Text="Start Game" 
+                Clicked="OnStartGameClicked"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

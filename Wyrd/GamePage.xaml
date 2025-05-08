@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wyrd.GamePage"
+             Title="Game Page">
+
+    <!-- A simple vertical stack layout with a welcome label -->
+    <VerticalStackLayout 
+        Padding="30" 
+        Spacing="20">
+        
+        <Label Text="Welcome to Wyrd!"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Empty grid will be dynamically filled in C# -->
+        <Grid x:Name="WordGrid"
+          HorizontalOptions="Center"
+          VerticalOptions="Center" />
+
+    </VerticalStackLayout>
+
+</ContentPage>  
