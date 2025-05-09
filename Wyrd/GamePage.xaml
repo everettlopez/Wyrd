@@ -5,19 +5,15 @@
              Title="Game Page">
 
     <!-- A simple vertical stack layout with a welcome label -->
-    <VerticalStackLayout 
-        Padding="30" 
-        Spacing="20">
-        
-        <Label Text="Welcome to Wyrd!"
-               FontSize="24"
-               HorizontalOptions="Center" />
+    <VerticalStackLayout Padding="20" Spacing="10">
+        <Label Text="Wyrd: Word Search"
+           FontSize="32"
+           HorizontalOptions="Center" />
 
-        <!-- Empty grid will be dynamically filled in C# -->
         <Grid x:Name="WordGrid"
           HorizontalOptions="Center"
           VerticalOptions="Center" />
-
     </VerticalStackLayout>
+
 
 </ContentPage>  
