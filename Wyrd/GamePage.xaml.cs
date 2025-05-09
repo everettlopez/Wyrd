@@ -45,7 +45,7 @@ public partial class GamePage : ContentPage
                     VerticalTextAlignment = TextAlignment.Center,
                     WidthRequest = 40,
                     HeightRequest = 40,
-                    Margin = new Thickness(2)
+                    Margin = new Thickness(0)
                 };
 
                 // Position in grid
