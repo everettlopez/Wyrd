@@ -1,18 +1,65 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Wyrd.GamePage"
-             Title="Game Page">
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Wyrd.GamePage"
+    Title="Game Page">
 
     <!-- A simple vertical stack layout with a welcome label -->
-    <VerticalStackLayout Padding="20" Spacing="10">
-        <Label Text="Wyrd: Word Search"
-           FontSize="32"
-           HorizontalOptions="Center" />
+    <VerticalStackLayout 
+        Padding="20" 
+        Spacing="10"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
 
-        <Grid x:Name="WordGrid"
-          HorizontalOptions="Center"
-          VerticalOptions="Center" />
+        
+        
+        <Label 
+            Text="Wyrd: Word Search"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <Grid 
+            x:Name="WordGrid"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+        <!-- Selected letters will show here -->
+        <Label 
+           x:Name="LetterBox"
+           Text=""
+           FontSize="20"
+           TextColor="DarkSlateGray"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           BackgroundColor="#eeeeee"
+           Padding="10"
+           WidthRequest="300"
+           HeightRequest="50"
+           VerticalTextAlignment="Center"
+           HorizontalTextAlignment="Center"/>
+
+        <HorizontalStackLayout
+            Padding="5" 
+            Spacing="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Button 
+                x:Name="ConfirmBtn"
+                Text="Confirm"
+                Clicked="ConfirmButtonClicked"
+                WidthRequest="150"/>
+
+            <Button 
+                x:Name="ClearBtn"
+                Text="Clear"
+                Clicked="ClearButtonClicked"
+                WidthRequest="150"/>
+
+        </HorizontalStackLayout>
+
+
     </VerticalStackLayout>
 
 

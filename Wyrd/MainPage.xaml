@@ -4,9 +4,11 @@
              x:Class="Wyrd.MainPage">
 
     <ScrollView>
+        
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
+            
             <Image
                 Source="wyrd_default.png"
                 HeightRequest="185"
@@ -16,16 +18,14 @@
                 Text="Wyrd Search"
                 Style="{StaticResource Headline}" />
 
-            <Label
-                Text="Click Below to Begin"
-                Style="{StaticResource SubHeadline}" />
-
             <!-- A button that navigates to the GamePage when clicked -->
             <Button
                 x:Name="StartBtn"
                 Text="Start Game" 
                 Clicked="OnStartGameClicked"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" 
+                WidthRequest="300"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 
