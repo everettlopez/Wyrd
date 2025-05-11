@@ -19,6 +19,14 @@
             FontSize="32"
             HorizontalOptions="Center" />
 
+        <ProgressBar 
+            x:Name="ProgressBar"
+            HorizontalOptions="Center"
+            WidthRequest="300"
+            HeightRequest="20"/>
+        
+        
+
         <Grid 
             x:Name="WordGrid"
             HorizontalOptions="Center"
