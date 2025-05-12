@@ -3,11 +3,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Wyrd.GamePage"
-    Title="Game Page">
+    Title="Game Page"
+    BackgroundColor="Black">
 
     <!-- A simple vertical stack layout with a welcome label -->
     <VerticalStackLayout 
-        Padding="20" 
+        Padding="5" 
         Spacing="10"
         HorizontalOptions="Center"
         VerticalOptions="Center">
@@ -24,8 +25,15 @@
             HorizontalOptions="Center"
             WidthRequest="300"
             HeightRequest="20"/>
-        
-        
+
+        <Label 
+            x:Name="ProgressText"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center"
+            WidthRequest="300"
+            IsVisible="Hidden"/>
+
+
 
         <Grid 
             x:Name="WordGrid"
@@ -57,15 +65,60 @@
                 x:Name="ConfirmBtn"
                 Text="Confirm"
                 Clicked="ConfirmButtonClicked"
-                WidthRequest="150"/>
+                WidthRequest="150"
+                BackgroundColor="Orange"
+                TextColor="Black"/>
 
             <Button 
                 x:Name="ClearBtn"
                 Text="Clear"
                 Clicked="ClearButtonClicked"
-                WidthRequest="150"/>
+                WidthRequest="150"
+                BackgroundColor="Orange"
+                TextColor="Black"/>
 
         </HorizontalStackLayout>
+
+
+        <HorizontalStackLayout
+            Padding="5" 
+            Spacing="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <Button
+                x:Name="NewGameBtn"
+                Text="New Game"
+                Clicked="NewGameClicked"
+                IsEnabled="False"/>
+
+            <Button 
+                x:Name="HelpBtn"
+                Text="Help"
+                Clicked="HelpButtonClicked"
+                BackgroundColor="Orange"
+                TextColor="Black"
+                WidthRequest="100"/>
+
+            <Button
+                x:Name="BackBtn"
+                Text="Main Screen"
+                Clicked="BackBtnClicked"
+                BackgroundColor="Orange"
+                TextColor="Black"/>
+
+
+
+        </HorizontalStackLayout>
+        
+        
+
+        <Label 
+            Text="@2025 Everett Lopez. All Rights Reserved."
+            HorizontalTextAlignment="Center"/>
+
+
+
 
 
     </VerticalStackLayout>
