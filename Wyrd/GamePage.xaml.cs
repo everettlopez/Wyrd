@@ -1,5 +1,7 @@
+using System.Numerics;
 using System.Text;
 using System.Xml.Serialization;
+
 
 namespace Wyrd;
 
@@ -12,8 +14,10 @@ public partial class GamePage : ContentPage
     private readonly Random random = new Random();
     private StringBuilder selectedLetters = new StringBuilder();
     private List<string> wordList = new List<string>();             // To store the words for the grid
-    private int totalWords;
-    private int wordsProcessed;
+    private List<string> usableWords = new List<string>();             // To store the words for the grid
+    private List<string> foundWords = new List<string>();
+    private List<string> totalWords = new List<string>();
+
 
     public GamePage()
     {
@@ -52,15 +56,20 @@ public partial class GamePage : ContentPage
 
         String result = selectedLetters.ToString().ToUpper();
         
-        if(wordList.Contains(result))
+        if(totalWords.Contains(result) && !foundWords.Contains(result))
         {
             System.Diagnostics.Debug.WriteLine("Correct");
 
-            wordsProcessed++;
+            foundWords.Add(result);
 
             UpdateProgressBar();
 
 
+        }
+        else if(totalWords.Contains(result) && foundWords.Contains(result))
+        {
+            System.Diagnostics.Debug.WriteLine("Correct, but you've already found this word.");
+            DisplayAlert("Word Already Found", "You have already used this word in an attempt. Don'r give up and try again.", "Continue");
         }
         else
         {
@@ -81,9 +90,8 @@ public partial class GamePage : ContentPage
 
     private void UpdateProgressBar()
     {
-        if (totalWords == 0) return;
 
-        double normalizedProgress = (double)wordsProcessed / totalWords;
+        double normalizedProgress = (double) foundWords.Count / totalWords.Count;
         ProgressBar.Progress = normalizedProgress;
 
         LetterBox.Text = "";
@@ -112,18 +120,18 @@ public partial class GamePage : ContentPage
             while (reader.Peek() >= 0)
             {
                 string? line = await reader.ReadLineAsync();
+
                 if (!string.IsNullOrWhiteSpace(line))
                 {
                     string word = line.Trim().ToUpper();
-                    if (word.Length == Columns)
+
+                    if (word.Length <= Columns || word.Length <= Rows)
                     {
                         wordList.Add(word);
                         System.Diagnostics.Debug.WriteLine($"Loaded word: {word}");
                     }
                 }
             }
-
-            totalWords = wordList.Count;
 
             System.Diagnostics.Debug.WriteLine($"Total words loaded: {wordList.Count}");
         }
@@ -139,11 +147,15 @@ public partial class GamePage : ContentPage
         bool[,] occupied = new bool[Rows, Columns];
 
         // Filter usable words (length must fit within grid)
-        var usableWords = wordList
+        usableWords = wordList
             .Where(w => w.Length <= Math.Max(Columns, Rows))
             .OrderBy(_ => random.Next())
             .Take(10) // adjust number of words you want to place
             .ToList();
+
+  
+
+
 
         foreach (var word in usableWords)
         {
@@ -181,6 +193,7 @@ public partial class GamePage : ContentPage
                         occupied[r, c] = true;
                     }
 
+                    totalWords.Add(word);
                     System.Diagnostics.Debug.WriteLine($"Placed word '{word}' at ({startRow}, {startCol}) {(horizontal ? "horizontally" : "vertically")}");
                     placed = true;
                 }
@@ -197,6 +210,9 @@ public partial class GamePage : ContentPage
             }
         }
 
+
+        System.Diagnostics.Debug.WriteLine($"Total number of words in the grid are: {totalWords.Count}");
+
         return grid;
     }
 
@@ -205,6 +221,7 @@ public partial class GamePage : ContentPage
         WordGrid.ColumnDefinitions.Clear();
         WordGrid.RowDefinitions.Clear();
         WordGrid.Children.Clear();
+        
 
         for (int col = 0; col < Columns; col++)
             WordGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(40) });
