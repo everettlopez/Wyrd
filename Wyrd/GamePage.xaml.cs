@@ -24,6 +24,7 @@ public partial class GamePage : ContentPage
     public GamePage()
     {
         InitializeComponent();
+
         _ = InitializeGameAsync(); // Fire-and-forget async call
     }
 
