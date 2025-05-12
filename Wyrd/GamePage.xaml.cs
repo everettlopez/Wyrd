@@ -18,6 +18,8 @@ public partial class GamePage : ContentPage
     private List<string> foundWords = new List<string>();
     private List<string> totalWords = new List<string>();
 
+    public List<Button> selectedButtons = new List<Button>();       // Helpful to visualize which buttons to change
+
 
     public GamePage()
     {
@@ -43,12 +45,18 @@ public partial class GamePage : ContentPage
         if (sender is Button button && button.CommandParameter is ValueTuple<int, int, char> info)
         {
             var (row, col, letter) = info;
-            System.Diagnostics.Debug.WriteLine($"Clicked cell [{row}, {col}] with letter '{letter}'");
 
-            selectedLetters.Append(letter);
-            LetterBox.Text = selectedLetters.ToString();
+            if (!selectedButtons.Contains(button))
+            {
+                selectedButtons.Add(button);
+                selectedLetters.Append(letter);
+                LetterBox.Text = selectedLetters.ToString();
+            }
+
+            System.Diagnostics.Debug.WriteLine($"Clicked cell [{row}, {col}] with letter '{letter}'");
         }
     }
+
 
     private void ConfirmButtonClicked(object sender, EventArgs e)
     {
@@ -59,10 +67,16 @@ public partial class GamePage : ContentPage
         if(totalWords.Contains(result) && !foundWords.Contains(result))
         {
             System.Diagnostics.Debug.WriteLine("Correct");
-
             foundWords.Add(result);
-
             UpdateProgressBar();
+
+            foreach (var button in selectedButtons)
+            {
+                button.BackgroundColor = Colors.LightGreen;
+                button.IsEnabled = false;
+            }
+
+            selectedButtons.Clear();
 
 
         }
@@ -84,6 +98,7 @@ public partial class GamePage : ContentPage
     {
         System.Diagnostics.Debug.WriteLine("Clear button has been clicked");
 
+        selectedButtons.Clear();
         selectedLetters.Clear();
         LetterBox.Text = "";
     }
